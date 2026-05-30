@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galaxy Landscaping — Financial Clarity Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f4f1e8;
+      color: #2a2e24;
+      font-family: 'DM Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #0f1410;
+      border-bottom: 1px solid #222820;
+      padding: 32px 40px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #5a6a50;
+      margin-bottom: 8px;
+    }
+
+    .header-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: #e8e4dc;
+      line-height: 1.1;
+    }
+
+    .header-title span { color: #8fb87a; }
+
+    .header-sub {
+      font-size: 13.5px;
+      color: #5a6a50;
+      font-weight: 300;
+      margin-top: 6px;
+    }
+
+    .header-meta {
+      text-align: right;
+    }
+
+    .meta-tag {
+      display: inline-block;
+      background: #1a2016;
+      border: 1px solid #2a3824;
+      border-radius: 5px;
+      padding: 5px 12px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: #6a9a5a;
+      margin-bottom: 6px;
+    }
+
+    .meta-anchor {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: #8fb87a;
+      text-align: right;
+    }
+
+    .meta-anchor-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #3a4a34;
+      text-align: right;
+    }
+
+    /* ── INTRO BAND ── */
+    .intro-band {
+      background: #ece9df;
+      border-bottom: 1px solid #ddd9ce;
+      padding: 20px 40px;
+    }
+
+    .intro-band p {
+      font-size: 13px;
+      color: #5a6252;
+      line-height: 1.7;
+      max-width: 680px;
+    }
+
+    .intro-band strong {
+      color: #2a3a24;
+    }
+
+    /* ── MAIN ── */
+    .main {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 48px 24px 72px;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-badge {
+      background: #e4eedc;
+      border: 1px solid #c0d4b4;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #4a7a3a;
+    }
+
+    .section-badge.teaser {
+      background: #ece9e0;
+      border-color: #d8d4c8;
+      color: #9a9e8e;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #2a2e24;
+    }
+
+    .section-title.teaser {
+      color: #9a9e8e;
+    }
+
+    /* ── DEEP SECTION ── */
+    .deep-section {
+      margin-bottom: 52px;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    @media (max-width: 700px) {
+      .scenario-grid { grid-template-columns: 1fr; }
+      .header { padding: 24px 20px 20px; }
+      .intro-band { padding: 16px 20px; }
+      .main { padding: 32px 16px 56px; }
+    }
+
+    /* ── INPUT PANEL ── */
+    .panel {
+      background: #ffffff;
+      border: 1px solid #ddd9d0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .panel-head {
+      padding: 14px 18px 12px;
+      border-bottom: 1px solid #ece8df;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f9f7f2;
+    }
+
+    .panel-head-icon { font-size: 14px; }
+
+    .panel-head-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #6a6e60;
+    }
+
+    .input-block {
+      padding: 18px 20px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      line-height: 1.85;
+      color: #7a7e70;
+    }
+
+    .input-block .row { margin-bottom: 2px; }
+    .input-block .key { color: #5a6252; }
+    .input-block .val { color: #3a5a2e; }
+    .input-block .note {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #e8e4da;
+      color: #9a9e8e;
+      font-size: 10px;
+      font-style: italic;
+    }
+
+    /* ── OUTPUT PANEL ── */
+    .output-panel {
+      background: #f2f7ee;
+      border: 1px solid #c8d8c0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .output-head {
+      padding: 14px 18px 12px;
+      border-bottom: 1px solid #d4e0cc;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #e8f0e2;
+    }
+
+    .output-head-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .output-head-icon { font-size: 14px; }
+
+    .output-head-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #3a6a2a;
+    }
+
+    .claude-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: #7a9a6a;
+      text-transform: uppercase;
+    }
+
+    .output-body {
+      padding: 20px;
+    }
+
+    .output-section {
+      margin-bottom: 18px;
+    }
+
+    .output-section:last-child { margin-bottom: 0; }
+
+    .output-section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #4a7a3a;
+      border-bottom: 1px solid #c8d8c0;
+      padding-bottom: 5px;
+      margin-bottom: 9px;
+    }
+
+    .output-section-text {
+      font-size: 12.5px;
+      line-height: 1.75;
+      color: #3a3e34;
+    }
+
+    .output-section-text strong {
+      color: #1e2a18;
+    }
+
+    /* ── TEASER SECTION ── */
+    .teaser-section {
+      margin-bottom: 52px;
+    }
+
+    .teaser-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 700px) {
+      .teaser-grid { grid-template-columns: 1fr; }
+    }
+
+    .teaser-card {
+      background: #f8f6f0;
+      border: 1px solid #ddd9ce;
+      border-radius: 10px;
+      overflow: hidden;
+      opacity: 0.8;
+    }
+
+    .teaser-card-head {
+      padding: 14px 18px 12px;
+      border-bottom: 1px solid #e8e4da;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f2f0e8;
+    }
+
+    .teaser-card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #9a9e8e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .teaser-card-icon { font-size: 13px; opacity: 0.5; }
+
+    .teaser-unlock {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #b0ac9e;
+      background: #e8e4da;
+      border: 1px solid #d8d4c8;
+      border-radius: 3px;
+      padding: 3px 8px;
+    }
+
+    .teaser-body {
+      padding: 18px 20px;
+    }
+
+    .teaser-desc {
+      font-size: 12px;
+      color: #8a8e7e;
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
+    .teaser-snippet {
+      background: #eeeae0;
+      border: 1px solid #ddd9ce;
+      border-radius: 6px;
+      padding: 14px 16px;
+    }
+
+    .teaser-snippet-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #b0ac9e;
+      margin-bottom: 8px;
+    }
+
+    .teaser-snippet-text {
+      font-size: 11.5px;
+      color: #9a9e8e;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .teaser-snippet-text strong {
+      color: #7a7e70;
+      font-style: normal;
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid #ddd9ce;
+      margin: 0 0 48px;
+    }
+
+    .what-else-header {
+      margin-bottom: 28px;
+    }
+
+    .what-else-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #9a9e8e;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+
+    .what-else-sub {
+      font-size: 12px;
+      color: #aaa8a0;
+    }
+
+    /* ── BOTTOM STRIP ── */
+    .bottom-strip {
+      background: #0d100b;
+      border: 1px solid #1a2018;
+      border-radius: 10px;
+      padding: 26px 28px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      margin-top: 56px;
+    }
+
+    @media (max-width: 600px) {
+      .bottom-strip { grid-template-columns: 1fr; }
+    }
+
+    .bottom-text {}
+
+    .bottom-headline {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: #7a9a6a;
+      margin-bottom: 7px;
+    }
+
+    .bottom-body {
+      font-size: 12.5px;
+      color: #4a5a44;
+      line-height: 1.65;
+    }
+
+    .bottom-body a {
+      color: #6a8a5a;
+      text-decoration: none;
+    }
+
+    .bottom-stats {
+      display: flex;
+      gap: 28px;
+      flex-shrink: 0;
+    }
+
+    .bstat {
+      text-align: center;
+    }
+
+    .bstat-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: #8fb87a;
+      line-height: 1;
+    }
+
+    .bstat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #3a4a34;
+      margin-top: 4px;
+    }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      margin-top: 20px;
+      font-family: 'DM Mono', monospace;
+      font-size: 9.5px;
+      color: #b0ac9e;
+      letter-spacing: 0.06em;
+      text-align: center;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <div class="eyebrow">Galaxy Landscaping · Bucks County, PA · Financial Clarity Preview</div>
+      <div class="header-title">What your numbers could tell you<br><span>every week.</span></div>
+      <div class="header-sub">Built with Claude AI · May 2026 · Illustrative — based on a company like yours</div>
+    </div>
+    <div class="header-meta">
+      <div class="meta-tag">Fractional CFO cost</div>
+      <div class="meta-anchor">$5,000 <span style="font-size:14px;color:#4a6040">/mo</span></div>
+      <div class="meta-anchor-label">what you were considering</div>
+    </div>
+  </div>
+
+  <!-- INTRO BAND -->
+  <div class="intro-band">
+    <p>A fractional CFO answers the same 4–6 questions every month. Below is what two of those answers look like — built specifically for a landscaping operation running 400+ jobs a month. <strong>No setup required on your end. No consultant. Just Claude and the numbers you already track.</strong></p>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+
+    <!-- ── SECTION 1: CASH FLOW ── -->
+    <div class="deep-section">
+      <div class="section-label">
+        <div class="section-badge">Deep dive · 01</div>
+        <div class="section-title">Weekly Cash Flow Read</div>
+      </div>
+
+      <div class="scenario-grid">
+        <!-- Input -->
+        <div class="panel">
+          <div class="panel-head">
+            <span class="panel-head-icon">📋</span>
+            <span class="panel-head-title">What you paste in</span>
+          </div>
+          <div class="input-block">
+            <div class="row"><span class="key">Checking balance: </span><span class="val">$22,400</span></div>
+            <div class="row"><span class="key">Outstanding invoices: </span><span class="val">$15,800</span></div>
+            <div class="row"><span class="key">Bills due this week: </span><span class="val">$8,200</span></div>
+            <div class="row" style="padding-left:14px;color:#404840;font-size:10px">— payroll $5,400 · fuel/materials $1,800 · equipment lease $1,000</div>
+            <div class="row" style="margin-top:8px"><span class="key">Jobs scheduled this week: </span><span class="val">52 jobs @ avg $185</span></div>
+            <div class="row"><span class="key">Last week collected: </span><span class="val">$11,200</span></div>
+            <div class="note">Spring cleanup winding down · transitioning to summer maintenance cycle</div>
+          </div>
+        </div>
+
+        <!-- Output -->
+        <div class="output-panel">
+          <div class="output-head">
+            <div class="output-head-left">
+              <span class="output-head-icon">🎯</span>
+              <span class="output-head-title">Claude's Read</span>
+            </div>
+            <span class="claude-tag">Generated · Claude AI</span>
+          </div>
+          <div class="output-body">
+            <div class="output-section">
+              <div class="output-section-label">Where You Stand</div>
+              <div class="output-section-text">You're in solid shape heading into summer. With $22.4K in the bank, $9.6K in work already scheduled this week, and $11.2K collected last week, you have clear runway through your next payroll. The $15.8K in outstanding invoices is the one number to watch — if those are aging past 30 days, they need attention now before summer volume makes them easy to forget.</div>
+            </div>
+            <div class="output-section">
+              <div class="output-section-label">Watch Out For</div>
+              <div class="output-section-text">Your biggest single exposure is <strong>payroll timing</strong>. $5,400 going out mid-week means any large collection that slips to the following week creates unnecessary pressure. Also: as you shift from spring cleanups to maintenance cycles, your weekly revenue will normalize — the project spike is ending.</div>
+            </div>
+            <div class="output-section">
+              <div class="output-section-label">This Week's Priority</div>
+              <div class="output-section-text">Run your outstanding invoice list and follow up on anything older than 14 days. You have the cash to operate comfortably — the goal this week is making sure AR doesn't age into a summer problem.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SECTION 2: JOB PROFITABILITY ── -->
+    <div class="deep-section">
+      <div class="section-label">
+        <div class="section-badge">Deep dive · 02</div>
+        <div class="section-title">Job Profitability Check</div>
+      </div>
+
+      <div class="scenario-grid">
+        <!-- Input -->
+        <div class="panel">
+          <div class="panel-head">
+            <span class="panel-head-icon">📋</span>
+            <span class="panel-head-title">What you paste in</span>
+          </div>
+          <div class="input-block">
+            <div class="row" style="margin-bottom:6px;color:#5a6452">Service · Labor · Materials</div>
+            <div class="row"><span class="key">Lawn maintenance </span><span class="val">(2 hrs, 2 crew): $95 charge — labor $52, materials $8</span></div>
+            <div class="row" style="margin-top:6px"><span class="key">Mulch install </span><span class="val">(4 hrs, 2 crew): $380 charge — labor $110, materials $145</span></div>
+            <div class="row" style="margin-top:6px"><span class="key">Hardscape patio </span><span class="val">(16 hrs, 3 crew): $3,200 charge — labor $460, materials $1,850</span></div>
+            <div class="row" style="margin-top:6px"><span class="key">Spring cleanup </span><span class="val">(5 hrs, 2 crew): $295 charge — labor $135, materials $25</span></div>
+            <div class="row" style="margin-top:6px"><span class="key">Tree trimming </span><span class="val">(3 hrs, 2 crew): $265 charge — labor $85, materials $15</span></div>
+          </div>
+        </div>
+
+        <!-- Output -->
+        <div class="output-panel">
+          <div class="output-head">
+            <div class="output-head-left">
+              <span class="output-head-icon">🎯</span>
+              <span class="output-head-title">Claude's Read</span>
+            </div>
+            <span class="claude-tag">Generated · Claude AI</span>
+          </div>
+          <div class="output-body">
+            <div class="output-section">
+              <div class="output-section-label">Most Profitable Service</div>
+              <div class="output-section-text"><strong>Tree trimming at 62% margin</strong> — you're keeping 62 cents of every dollar after labor and materials. High-skill, low-material work. You're probably not charging enough for it.</div>
+            </div>
+            <div class="output-section">
+              <div class="output-section-label">Least Profitable Service</div>
+              <div class="output-section-text"><strong>Hardscape at 28% margin.</strong> That looks like a big job — but after $460 in labor and $1,850 in materials, you're netting $890 on 16 crew-hours. If a project runs two hours long or materials overage by 10%, your margin is gone before the invoice goes out.</div>
+            </div>
+            <div class="output-section">
+              <div class="output-section-label">Pricing Adjustment Needed</div>
+              <div class="output-section-text">Raise hardscape pricing by <strong>12–15%</strong> or tighten scope controls. Your labor estimate is the variable — if you scope 16 hours but run 18–20, you've already given the margin away.</div>
+            </div>
+            <div class="output-section">
+              <div class="output-section-label">Bottom Line</div>
+              <div class="output-section-text">Your maintenance and cleanup work earns more per crew-hour than your project work. Hardscape looks big — but your crews make more money mowing lawns.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── WHAT ELSE SECTION ── -->
+    <hr class="section-divider">
+
+    <div class="what-else-header">
+      <div class="what-else-title">What else is possible</div>
+      <div class="what-else-sub">Two more questions a fractional CFO would answer — once the basics are dialed in.</div>
+    </div>
+
+    <div class="teaser-section">
+      <div class="teaser-grid">
+
+        <!-- Teaser 1: Hiring -->
+        <div class="teaser-card">
+          <div class="teaser-card-head">
+            <div class="teaser-card-title">
+              <span class="teaser-card-icon">👷</span>
+              Hiring Decision Model
+            </div>
+            <span class="teaser-unlock">Unlock later</span>
+          </div>
+          <div class="teaser-body">
+            <div class="teaser-desc">Thinking about adding a crew lead or foreman? This models whether the hire actually makes financial sense — what it costs, what revenue it needs to generate, and whether the timing is right given your booking depth.</div>
+            <div class="teaser-snippet">
+              <div class="teaser-snippet-label">Sample output — excerpt</div>
+              <div class="teaser-snippet-text"><strong>The Short Answer:</strong> Not yet — but in 6 weeks, yes. You're 3 weeks out on bookings, and a foreman now costs you $1,030/week before he generates his first new estimate. Wait until you're 5+ weeks booked, then pull the trigger...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Teaser 2: Monthly Pulse -->
+        <div class="teaser-card">
+          <div class="teaser-card-head">
+            <div class="teaser-card-title">
+              <span class="teaser-card-icon">📊</span>
+              Monthly Business Pulse
+            </div>
+            <span class="teaser-unlock">Unlock later</span>
+          </div>
+          <div class="teaser-body">
+            <div class="teaser-desc">A fast read on how the month went and what to focus on next. Grade the month, surface the one number that matters most, and set the two priorities for the month ahead. Replaces the monthly CFO review call.</div>
+            <div class="teaser-snippet">
+              <div class="teaser-snippet-label">Sample output — excerpt</div>
+              <div class="teaser-snippet-text"><strong>Month Grade: B+</strong> — You beat revenue target by 8% but your AR over 30 days crept up $3,200. That's the story of the month. The revenue is there; the collections aren't following it. <strong>Next month's focus:</strong> tighten AR before July volume hits...</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── BOTTOM STRIP ── -->
+    <div class="bottom-strip">
+      <div class="bottom-text">
+        <div class="bottom-headline">Built with Claude in about 2 hours.</div>
+        <div class="bottom-body">
+          Everything above was generated using Claude AI — the same subscription at $20/month. The outputs are only as good as the inputs, but once the prompts are set up for your specific business, this runs in minutes. The two "deep dive" tools above cover most of what a fractional CFO does for a company at your stage. The human still matters for bank relationships and big strategy. Everything else? This handles it.
+        </div>
+      </div>
+      <div class="bottom-stats">
+        <div class="bstat">
+          <div class="bstat-val">$4,980</div>
+          <div class="bstat-label">saved / month</div>
+        </div>
+        <div class="bstat">
+          <div class="bstat-val">~30</div>
+          <div class="bstat-label">min / week</div>
+        </div>
+        <div class="bstat">
+          <div class="bstat-val">4</div>
+          <div class="bstat-label">CFO questions</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      Numbers above are illustrative — built to match a landscaping company of Galaxy's size and season. Your actual analysis uses your real numbers. · Built by V3 Operations · v3ops.co
+    </div>
+
+  </div>
+
+</body>
+</html>
