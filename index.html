@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V3 Ops — Demo Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f4f1e8;
+      color: #2a2e24;
+      font-family: 'DM Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    .header {
+      background: #0f1410;
+      border-bottom: 1px solid #222820;
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .header-left {}
+
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #5a6a50;
+      margin-bottom: 6px;
+    }
+
+    .header-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: #e8e4dc;
+    }
+
+    .header-title span { color: #8fb87a; }
+
+    .header-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #3a4a34;
+      background: #1a2016;
+      border: 1px solid #2a3524;
+      border-radius: 4px;
+      padding: 6px 12px;
+    }
+
+    .main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .page-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .page-label-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #5a6252;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .page-label-line {
+      flex: 1;
+      height: 1px;
+      background: #ddd9ce;
+    }
+
+    .demo-count {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: #aaa8a0;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── DEMO CARD ── */
+    .card {
+      background: #ffffff;
+      border: 1px solid #ddd9d0;
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 14px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover {
+      border-color: #c0d4b4;
+    }
+
+    .card-left {}
+
+    .card-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #9a9e8e;
+      margin-bottom: 6px;
+    }
+
+    .card-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #2a2e24;
+      margin-bottom: 5px;
+    }
+
+    .card-desc {
+      font-size: 12.5px;
+      color: #7a7e70;
+      line-height: 1.55;
+    }
+
+    .card-url {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: #b0ac9e;
+      margin-top: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 480px;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-radius: 6px;
+      padding: 9px 16px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-open {
+      background: #4a6a3a;
+      color: #d4e8c4;
+    }
+
+    .btn-open:hover {
+      background: #5a7a4a;
+      transform: translateY(-1px);
+    }
+
+    .btn-copy {
+      background: #f0ede4;
+      color: #5a6252;
+      border: 1px solid #ddd9ce;
+    }
+
+    .btn-copy:hover {
+      background: #e8e4da;
+      border-color: #c8c4b8;
+    }
+
+    .btn-copy.copied {
+      background: #e4eedc;
+      color: #4a7a3a;
+      border-color: #c0d4b4;
+    }
+
+    /* ── EMPTY STATE (future cards) ── */
+    .card-empty {
+      background: #f9f7f2;
+      border: 1px dashed #ddd9ce;
+      border-radius: 10px;
+      padding: 22px 28px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      opacity: 0.6;
+    }
+
+    .card-empty-icon {
+      font-size: 18px;
+      opacity: 0.4;
+    }
+
+    .card-empty-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: #9a9e8e;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      margin-top: 52px;
+      padding-top: 24px;
+      border-top: 1px solid #ddd9ce;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: #b0ac9e;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-url {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: #8a9a7e;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 620px) {
+      .card { grid-template-columns: 1fr; }
+      .card-actions { justify-content: flex-start; }
+      .header { padding: 20px; }
+      .main { padding: 32px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow">V3 Operations · Luis Velasquez</div>
+      <div class="header-title">Demo <span>Hub</span></div>
+    </div>
+    <div class="header-badge">ak40lu.github.io/v3ops-demos</div>
+  </div>
+
+  <div class="main">
+
+    <div class="page-label">
+      <span class="page-label-title">Active Demos</span>
+      <span class="page-label-line"></span>
+      <span class="demo-count" id="demo-count">1 demo</span>
+    </div>
+
+    <!-- ── GALAXY LANDSCAPING ── -->
+    <div class="card">
+      <div class="card-left">
+        <div class="card-tag">Landscaping · Financial Clarity</div>
+        <div class="card-name">Galaxy Landscaping</div>
+        <div class="card-desc">Financial clarity preview — weekly cash flow read, job profitability check, and two advanced CFO scenarios. Built as a semi-cold outreach demo.</div>
+        <div class="card-url">ak40lu.github.io/v3ops-demos/galaxy-clarity-preview.html</div>
+      </div>
+      <div class="card-actions">
+        <a class="btn btn-open" href="galaxy-clarity-preview.html" target="_blank">Open ↗</a>
+        <button class="btn btn-copy" onclick="copyLink(this, 'https://ak40lu.github.io/v3ops-demos/galaxy-clarity-preview.html')">Copy Link</button>
+      </div>
+    </div>
+
+    <!-- ── EMPTY SLOTS ── -->
+    <div class="card-empty">
+      <span class="card-empty-icon">＋</span>
+      <span class="card-empty-text">Next demo goes here — push an HTML file to the repo</span>
+    </div>
+
+    <div class="card-empty">
+      <span class="card-empty-icon">＋</span>
+      <span class="card-empty-text">Next demo goes here — push an HTML file to the repo</span>
+    </div>
+
+    <div class="footer">
+      <span class="footer-note">private use only · not for distribution</span>
+      <span class="footer-url">github.com/AK40Lu/v3ops-demos</span>
+    </div>
+
+  </div>
+
+  <script>
+    function copyLink(btn, url) {
+      navigator.clipboard.writeText(url).then(() => {
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Link';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
